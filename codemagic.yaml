@@ -1,34 +1,25 @@
-# codemagic.yaml config
 workflows:
   android-release:
-    name: SmartPOS Pro Android Release Build
+    name: SmartPOS Pro APK Build
     max_build_duration: 30
     environment:
-      groups:
-        - signing # Keystore variables setup (Keystore credentials, etc.)
       flutter: stable
       java: 17
     triggering:
       events:
         - push
-      branches:
-        - main
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
     scripts:
-      - name: Fetch stable dependencies
-        script: |
-          flutter pub get
-      - name: Analyze formatting and lints
-        script: |
-          flutter analyze
-      - name: Build Android APK (Release)
-        script: |
-          flutter build apk --release --build-number=$BUILD_NUMBER
+      - name: Go to project root
+        script: cd $CM_BUILD_DIR
+      - name: Create android folder if missing
+        script: flutter create .
+      - name: Get packages
+        script: flutter pub get
+      - name: Build APK
+        script: flutter build apk --release
     artifacts:
-      - build/app/outputs/flutter-apk/*.apk
-    publishing:
-      email:
-        recipients:
-          - zerlinkhan65@gmail.com # Dispatches successful builds instantly
-        notify:
-          success: true
-          failure: true
+      - build/app/outputs/flutter-apk/app-release.apk
