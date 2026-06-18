@@ -3,7 +3,7 @@ workflows:
     name: SmartPOS Pro APK Build
     max_build_duration: 30
     environment:
-      flutter: stable
+      flutter: 3.22.0
       java: 17
     triggering:
       events:
@@ -15,8 +15,8 @@ workflows:
     scripts:
       - name: Go to project root
         script: cd $CM_BUILD_DIR
-      - name: Create android folder if missing
-        script: flutter create .
+      - name: Create android folder only
+        script: flutter create . --platforms=android
       - name: Get packages
         script: flutter pub get
       - name: Build APK
