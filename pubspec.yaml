@@ -1,0 +1,29 @@
+name: smartpos_pro
+description: Offline mobile POS billing application for shopkeepers.
+version: 1.0.0+1
+
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: ^2.3.3
+  pdf: ^3.10.8
+  printing: ^5.11.1
+  intl: ^0.19.3
+  path_provider: ^2.1.4
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    # A generic asset path setup if custom fonts or icons are needed
+    # - assets/images/
